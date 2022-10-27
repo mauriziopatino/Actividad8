@@ -42,38 +42,68 @@ public class Deck {
         Collections.shuffle(deckList);
     }
 
-    public static void head() {
+    public static void head() throws Exception{
 
-        Card firstElement = deckList.get(0);
-        System.out.println(firstElement.palo + "," + firstElement.color + "," + firstElement.valor);
-        deckList.remove(firstElement);
-        System.out.println("Quedan " + deckList.size());
+        try{
+
+            Card firstElement = deckList.get(0);
+            System.out.println(firstElement.palo + "," + firstElement.color + "," + firstElement.valor);
+            deckList.remove(firstElement);
+            System.out.println("Quedan " + deckList.size());
+
+            if(deckList.isEmpty()){
+                throw new Exception("Se han agotado las cartas");
+            }
+
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
     }
 
     public static void pick() {
-        Random myRandom = new Random();
-        int randNumber = myRandom.nextInt(1, deckList.size());
-        System.out.println(deckList.get(randNumber).palo + ","
-                + deckList.get(randNumber).color + ","
-                + deckList.get(randNumber).valor);
 
-        deckList.remove(randNumber);
-        System.out.println("Quedan " + deckList.size());
+        try {
+            Random myRandom = new Random();
+            int randNumber = (int) (Math.random()*deckList.size()+1);
+            System.out.println(deckList.get(randNumber).palo + ","
+                    + deckList.get(randNumber).color + ","
+                    + deckList.get(randNumber).valor);
+
+            deckList.remove(randNumber);
+            System.out.println("Quedan " + deckList.size());
+
+            if(deckList.isEmpty()){
+                throw new Exception("Se han agotado las cartas");
+            }
+
+        }catch(Exception e){
+            System.out.println(e);
+        }
 
     }
 
     public static void hand() {
-        Random myRandom = new Random();
-        for (int i = 1; i < 6; i++) {
-            int randNumber = myRandom.nextInt(1, deckList.size());
-            System.out.println(deckList.get(randNumber).palo + ","
-                    + deckList.get(randNumber).color + ","
-                    + deckList.get(randNumber).valor);
-            deckList.remove(randNumber);
 
+        try{
+            Random myRandom = new Random();
+            for (int i = 1; i < 6; i++) {
+                int randNumber = (int) (Math.random()*deckList.size()+1);
+                System.out.println(deckList.get(randNumber).palo + ","
+                        + deckList.get(randNumber).color + ","
+                        + deckList.get(randNumber).valor);
+                deckList.remove(randNumber);
+
+            }
+
+            System.out.println("Quedan " + deckList.size());
+
+            if(deckList.isEmpty()){
+                throw new Exception("Se han agotado las cartas");
+            }
+        }catch(Exception e){
+            System.out.println(e);
         }
-
-        System.out.println("Quedan " + deckList.size());
     }
 
     @Override
